@@ -10,28 +10,24 @@ def handler(event, context):
     maxRetries = 5  
     retryCount = 0 
 
+    # Get required field from req
+    body = json.loads(event.get("body", ""))
+    leetcodeUrl = body.get("link", "")
+    cookieToken = event.get("cookies", "")[0]
+
+    # Parse url link and retrieve question via leetscrape library
+    urlParts = leetcodeUrl.split('/')
+    questionSlug = urlParts[-2]
+    elementText = GetQuestionInfo(questionSlug).scrape().Body
+
+    # Use OpenAI to format to JSON.
+    OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+
+    llm = OpenAI(
+        openai_api_key=OPENAI_API_KEY)
+
     while retryCount < maxRetries:
         try:
-            print(event)
-            # Get required field from req
-            body = json.loads(event.get("body", ""))
-            print(body)
-            leetcodeUrl = body.get("link", "")
-            print(event.get("cookies", ""))
-            cookieToken = event.get("cookies", "")[0]
-            print(cookieToken)
-
-            # Parse url link and retrieve question via leetscrape library
-            urlParts = leetcodeUrl.split('/')
-            questionSlug = urlParts[-2]
-            elementText = GetQuestionInfo(questionSlug).scrape().Body
-
-            # Use OpenAI to format to JSON.
-            OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
-
-            llm = OpenAI(
-                openai_api_key=OPENAI_API_KEY)
-
             prompt = PromptTemplate.from_template('Given the following input of html, I want you to extract out a JSON format given the following types:'
 
                                                 '1.title: string;'
@@ -108,8 +104,6 @@ def handler(event, context):
             data = json.loads(secondResult)  
             data["url"] = leetcodeUrl    
 
-            print(data)    
-
             # POST request to insert question into database
             apiUrl = "https://1ht9alhibg.execute-api.ap-southeast-1.amazonaws.com/question/api/questions"
 
@@ -132,12 +126,10 @@ def handler(event, context):
                 "body": "Lambda function ran successfully but question is not inserted into database. The following error occurred:\nstatus code: {}\ncontent: {}".format(str(response.status_code), response.content)
                 }
 
-
         except Exception as e:
             print("Error. Current retry count: {}".format(str(retryCount)))
             print(e)
             retryCount += 1
-
 
     return {
         "statusCode": 408,
