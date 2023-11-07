@@ -1,0 +1,32 @@
+name: Frontend Build Check
+
+on:
+    pull_request:
+        branches: [master]
+    push:
+        branches: [production]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: |
+          cd frontend/  
+          npm install
+          npm ci --omit=dev
+          npm install @types/d3 --save
+
+      - name: Build
+        run: |
+          cd frontend/  
+          npm run build

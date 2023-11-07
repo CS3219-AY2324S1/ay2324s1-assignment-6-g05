@@ -1,0 +1,58 @@
+name: Backend Services Tests
+# targeting pull requests to master branch
+on:
+  pull_request:
+    branches: [master]
+jobs:
+  coverage:
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [18.x, 20.x]
+        service:
+          [
+            auth-service,
+            user-service,
+            question-service,
+            collaboration-service,
+            history-service,
+            matching-service,
+          ]
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout Current Branch
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+
+      - name: Clean up
+        run: |
+          rm -rf backend/${{matrix.service}}/node_modules
+          rm -rf backend/${{matrix.service}}/coverage
+
+      - name: Install Dependencies
+        run: |
+          cd backend/${{matrix.service}}
+          npm ci
+
+      - name: Run Tests and Collect Coverage Reports
+        env:
+          NODE_ENV: test
+          REDIS_URL: redis://localhost:6379
+        run: |
+          cd backend/${{matrix.service}}
+          npx jest --coverage --detectOpenHandles --forceExit

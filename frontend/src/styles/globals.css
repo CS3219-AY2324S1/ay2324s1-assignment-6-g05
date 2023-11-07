@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Necessary styling for Splitting in Workspace */
+
+.gutter {
+  background-color: rgb(26, 26, 26);
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+.gutter:hover {
+  background-color: #0a84ff;
+}
+
+.gutter.gutter-horizontal {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
+  cursor: col-resize;
+}
+
+.gutter.gutter-vertical {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=");
+  cursor: row-resize;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(31, 31, 31, 0.5);
+  border-radius: 1rem;
+  height: 1rem;
+}
+
+:-webkit-scrollbar-thumb:hover {
+  background-color: rgb(31, 31, 31);
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(60, 60, 60);
+}
+
+::-webkit-scrollbar-track:hover {
+  background-color: rgb(80, 80, 80);
+}
+
+/* React Quill Rich Text Editor */
+.quill > .ql-toolbar {
+  border-top-left-radius: 0.75em;
+  border-top-right-radius: 0.75em;
+  border: 1px solid #0000;
+  background-color: #27272a !important;
+}
+
+.quill > .ql-container {
+  border-bottom-left-radius: 0.75em;
+  border-bottom-right-radius: 0.75em;
+  border-color: 1px solid #27272a;
+}
+
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  color: rgba(255, 255, 255, 0.315);
+}
+
+.ch-domain-bg {
+  background-color: #27272a !important;
+  fill: #1e1e21 !important;
+}
+
+.bg-cal-heatmap {
+  background-color: #1E1E21 !important;
+}
+
+#cal-heatmap {
+  border-radius: 0.75rem;
+  border: 1px solid #0000;
+  padding: 2px;
+}
+
+.partner-cursor {
+  border: 0.5px solid rgb(2, 147, 84);
+  height: 1.1rem;
+  position: absolute;
+}
+
+.partner-highlight {
+  border: 0.5px solid rgb(2, 147, 84);
+  background-color: rgb(2, 147, 84);
+  opacity: 0.8;
+}
+
+#landing-page {
+  background-size: 100%;
+}
+
+
+
