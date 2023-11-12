@@ -1,0 +1,24 @@
+# This compose file serves as a debugging process for other services, will not use this in production
+services:
+  event-bus:
+    build: ./event-bus
+    ports:
+      - "6380:6379"
+    networks:
+      - peerprep
+  collaboration-cache:
+    build: ./collaboration-cache
+    ports:
+      - "6379:6379"
+    networks:
+      - peerprep
+  # postgresql:
+  #   build: ./postgresql
+  #   ports:
+  #     - "undefined"
+  #   networks:
+  #     - peerprep
+    
+networks:
+  peerprep:
+

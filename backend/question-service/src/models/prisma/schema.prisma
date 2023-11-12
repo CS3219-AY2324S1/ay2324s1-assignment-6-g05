@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+    schemas  = ["questions"]
+}
+
+model Question {
+    id          String   @id @default(cuid())
+    title       String   @unique
+    description String
+    topics      String[]
+    complexity  String
+    url         String
+    author      String   @default("LeetCode")
+
+    examples    Example[]
+    constraints String[]
+
+    createdOn DateTime @default(now())
+    updatedOn DateTime @updatedAt
+
+    @@schema("questions")
+}
+
+model Example {
+    id         String   @id @default(cuid())
+    questionId String
+    question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+    input       String
+    output      String
+    explanation String?
+
+    @@schema("questions")
+}

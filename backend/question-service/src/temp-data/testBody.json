@@ -1,0 +1,15 @@
+{
+  "title": "Test Create/Update Question",
+  "description": "Creating a question, should pass with 201 status code if successful.",
+  "category": ["Algorithms"],
+  "complexity": "easy",
+  "url": "https://leetcode.com/problemset/all/",
+  "examples": [
+    {
+      "input": "Test input",
+      "output": "Test output",
+      "explanation": "Some big brain works"
+    }
+  ],
+  "constraints": ["Some weird constraint for coding bro"]
+}

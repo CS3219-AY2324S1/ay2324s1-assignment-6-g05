@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    /* Modules */
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    "rootDir": "./src",                           /* Specify the base directory to resolve non-relative module names. */
+    // "paths": {
+    //   "@/*": ["./src/*"],
+    //   "@/lib/*": ["./src/lib/*"],
+    //   "@/controller/*": ["./src/controller/*"],
+    //   "@/models/*": ["./src/models/*"]
+    // },                               /* Specify multiple folders that act like './node_modules/@types'. */
+    "types": ["node", "jest"],                                      /* Specify type package names to be included without being referenced in a source file. */
+    "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */    "esModuleInterop": true,                       /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  }
+}
