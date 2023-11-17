@@ -105,7 +105,7 @@ def handler(event, context):
             data["url"] = leetcodeUrl    
 
             # POST request to insert question into database
-            apiUrl = "https://1ht9alhibg.execute-api.ap-southeast-1.amazonaws.com/question/api/questions"
+            apiUrl = "https://13d44n1t76.execute-api.ap-southeast-1.amazonaws.com/question/api/questions"
 
             headers = {
                 "Content-Type": "application/json",  # Set the Content-Type header as an example
