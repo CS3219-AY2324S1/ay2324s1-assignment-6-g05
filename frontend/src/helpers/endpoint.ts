@@ -200,7 +200,7 @@ export async function apiLambda(leetcodeUrl: string): Promise<ApiResponse> {
     link: leetcodeUrl,
   };
   
-  const apiUrl = "https://1ht9alhibg.execute-api.ap-southeast-1.amazonaws.com/lambda";
+  const apiUrl = "https://13d44n1t76.execute-api.ap-southeast-1.amazonaws.com/lambda";
 
   let jwtCookieString = "";
   if (cookies().get("jwt")) {
